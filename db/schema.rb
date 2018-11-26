@@ -10,17 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_104318) do
+ActiveRecord::Schema.define(version: 2018_11_22_023614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "shout_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shout_id"], name: "index_likes_on_shout_id"
+    t.index ["user_id", "shout_id"], name: "index_likes_on_user_id_and_shout_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "photo_shouts", force: :cascade do |t|
+    t.string "body_file_name", null: false
+    t.string "body_content_type", null: false
+    t.bigint "body_file_size", null: false
+    t.datetime "body_updated_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shouts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.string "content_type"
-    t.integer "content_id"
+    t.bigint "user_id", null: false
+    t.string "content_type", null: false
+    t.integer "content_id", null: false
     t.index ["content_id", "content_type"], name: "index_shouts_on_content_id_and_content_type"
     t.index ["user_id"], name: "index_shouts_on_user_id"
   end
@@ -44,5 +63,7 @@ ActiveRecord::Schema.define(version: 2018_11_21_104318) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "likes", "shouts"
+  add_foreign_key "likes", "users"
   add_foreign_key "shouts", "users"
 end
