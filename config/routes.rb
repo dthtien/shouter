@@ -11,10 +11,13 @@ Rails.application.routes.draw do
     resource :password,
       controller: "clearance/passwords",
       only: [:create, :edit, :update]
+
     member do
       post :follow, to: 'relations#follow'
       delete :unfollow, to: 'relations#unfollow'
     end
+
+    resources :followers, only: :index
   end
 
   resources :shouts do

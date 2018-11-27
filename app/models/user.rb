@@ -40,7 +40,7 @@ class User < ApplicationRecord
     return false if following? user
     true
   end
-  
+
   def follow!(user)
     return unless can_following? user
     followings << user
@@ -48,6 +48,10 @@ class User < ApplicationRecord
 
   def unfollow!(user)
     followings.destroy(user)
+  end
+
+  def timeline_shouts
+    Shout.where(user_id: following_ids + [id])
   end
   
   def to_param
