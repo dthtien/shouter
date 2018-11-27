@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_023614) do
+ActiveRecord::Schema.define(version: 2018_11_27_155022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 2018_11_22_023614) do
     t.datetime "body_updated_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "relations", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "following_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follower_id", "following_id"], name: "index_relations_on_follower_id_and_following_id", unique: true
   end
 
   create_table "shouts", force: :cascade do |t|
@@ -58,6 +66,8 @@ ActiveRecord::Schema.define(version: 2018_11_22_023614) do
     t.string "confirmation_token", limit: 128
     t.string "remember_token", limit: 128, null: false
     t.string "username"
+    t.integer "followings_count", default: 0, null: false
+    t.integer "followers_count", default: 0, null: false
     t.index ["email"], name: "index_users_on_email"
     t.index ["remember_token"], name: "index_users_on_remember_token"
     t.index ["username"], name: "index_users_on_username", unique: true
