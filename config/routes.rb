@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   end
 
   root 'homes#show'
-  resources :passwords, controller: "clearance/passwords", only: [:create, :new]
+  resources :passwords, controller: 'clearance/passwords', only: %i[create new]
   resource :session, only: [:create]
 
-  resources :users, only: [:create, :show] do
+  resources :users, only: %i[create show] do
     resource :password,
-      controller: "clearance/passwords",
-      only: [:create, :edit, :update]
+      controller: 'clearance/passwords',
+      only: %i[create edit update]
 
     member do
       post :follow, to: 'relations#follow'
@@ -20,7 +20,9 @@ Rails.application.routes.draw do
     resources :followers, only: :index
   end
 
-  resources :shouts do
+  post 'text_shouts' => 'shouts#create', default: { content_type: TextShout }
+  post 'photo_shouts' => 'shouts#create', default: { content_type: PhotoShout }
+  resources :shouts, only: [:show] do
     member do
       post :like, to: 'likes#create'
       delete :unlike, to: 'likes#destroy'

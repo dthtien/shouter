@@ -1,7 +1,7 @@
 h1 Dashboard
-= shout_form_for('TextShout') do |f|
+= shout_form_for(TextShout) do |f|
   = f.text_field :body, placeholder: 'Shout here!', required: true
-= shout_form_for('PhotoShout') do |f|
+= shout_form_for(PhotoShout) do |f|
   = f.file_field :body, placeholder: 'Shout here!', required: true
 
 
