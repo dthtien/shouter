@@ -1,9 +1,7 @@
 class UsersController < Clearance::UsersController
   def show
     @user = User.find_by_username(params[:id])
-    @shouts = @user.shouts.map do |shout|
-      ShoutPresenter.new shout
-    end
+    @timeline = TimelineService.new([@user])
   end
 
   def new

@@ -26,7 +26,7 @@ class ShoutsController < ApplicationController
     if shout.persisted?
       { notice: 'Shouted successfully'}
     else
-      {alert: shout.errors.full_messages.to_sentence}
+      { alert: shout.errors.full_messages.to_sentence }
     end
   end
 end

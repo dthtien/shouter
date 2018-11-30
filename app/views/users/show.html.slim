@@ -2,4 +2,4 @@ h1 = @user.username
 = user_action_link @user
 = link_to pluralize(@user.followers_count, 'follower'), user_followers_path(@user)
 = pluralize(@user.followings_count, 'following')
-= render @shouts
+= render @timeline
