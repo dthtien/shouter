@@ -11,7 +11,7 @@ module ShoutsHelper
     text
       .gsub(/@\w+/) { |mention| link_to mention, user_path(mention[1..-1]) }
       .gsub(/#\w+/) do |hashtag|
-        link_to hashtag, dashboard_path(hashtag: hashtag[1..-1])
+        link_to hashtag, dashboard_path(term: hashtag[1..-1])
       end.html_safe
   end
 end

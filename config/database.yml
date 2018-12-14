@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: shouter_production
-  username: shouter
+  username: deploy
   password: <%= ENV['SHOUTER_DATABASE_PASSWORD'] %>

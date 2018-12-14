@@ -10,21 +10,27 @@ class DashboardService
 
   private
 
+  attr_reader :user, :params
+
   def scope
     @scope ||= if hashtag.present?
-      SearchService.new(term: params[:hashtag]).results
-    else
-      Shout
-    end
+                SearchService.new(term: "%##{hashtag}%").results
+              else
+                Shout
+              end
   end
-
-  attr_reader :user, :params
 
   def timeline_users
     user.followings + [user]
   end
 
   def hashtag
-    params[:hashtag]
+    params[:term]
+  end
+
+  def term
+    return if params[:search].present?
+
+    params[:search][:term]
   end
 end

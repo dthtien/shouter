@@ -15,13 +15,15 @@ class User < ApplicationRecord
     class_name: 'Relation',
     foreign_key: :following_id
 
-  has_many :followings, 
+  has_many :followings,
     through: :following_relations
 
-  has_many :followers, 
+  has_many :followers,
     through: :follower_relations
 
   validates :username, presence: true, uniqueness: true
+
+  after_commit :send_greeting_mail, on: :create
 
   def like(shout)
     liked_shouts << shout
@@ -53,8 +55,14 @@ class User < ApplicationRecord
   def timeline_shouts
     Shout.where(user_id: following_ids + [id])
   end
-  
+
   def to_param
     username
+  end
+
+  private
+
+  def send_greeting_mail
+    UserMailer.send_greeting_mail(self.id).deliver_later
   end
 end

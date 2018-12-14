@@ -1,9 +1,11 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   constraints Clearance::Constraints::SignedIn.new do
     root 'dashboards#show'
     get '' => 'dashboard#show', as: 'dashboard'
   end
   root 'homes#show'
+  mount Sidekiq::Web => '/jobs'
   resources :passwords, controller: 'clearance/passwords', only: %i[create new]
   resource :session, only: [:create]
 

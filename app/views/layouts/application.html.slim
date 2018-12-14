@@ -1,4 +1,4 @@
-DOCTYPE html
+DOCTYPE
 html
   head
     title Shouter
@@ -9,11 +9,11 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   body
-    h1 lalalaalalal
+    = render 'layouts/search'
     - if signed_in?
-      Signed in as 
+      | Signed in as 
       = current_user.email
-      = button 'Sign out', sign_out_path, method: :delete
+      = link_to 'Sign out', sign_out_path, method: :delete
     - else
       = link_to  'Sign in', sign_in_path 
     

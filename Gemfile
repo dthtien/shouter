@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'clearance'
 gem 'slim-rails'
 gem 'paperclip'
+gem 'sidekiq'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -30,6 +31,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
+gem 'orats'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+group :development do
+  gem "capistrano", "~> 3.11", require: false
+  gem 'capistrano-rbenv', '~> 2.1'
+end

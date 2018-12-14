@@ -1,0 +1,3 @@
+= form_for :search, url: dashboard_path, method: :get do |f|
+  = f.text_field :term, placeholder: 'Search here', value: params[:term]
+  = f.submit 'Search'  
