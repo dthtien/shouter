@@ -1,9 +1,8 @@
 .shout-body
   = render shout.content
-  p 
+  p
     = gravatar shout.owner_email
     = link_to shout.username, shout.user
-  = link_to shout do 
+  = link_to shout do
     i = time_ago_in_words shout.created_at
-    = link_to_action shout
   hr

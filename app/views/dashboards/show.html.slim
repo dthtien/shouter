@@ -4,5 +4,5 @@ h1 Dashboard
 = shout_form_for(PhotoShout) do |f|
   = f.file_field :body, placeholder: 'Shout here!', required: true
 
-
-= render @dashboard.timeline
+#shouts
+  = render @dashboard.timeline

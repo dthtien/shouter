@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/jobs'
   resources :passwords, controller: 'clearance/passwords', only: %i[create new]
   resource :session, only: [:create]
+  resources :messages, only: %i[index]
 
   resources :users, only: %i[create show] do
     resource :password,

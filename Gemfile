@@ -41,3 +41,5 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-bundler', '~> 1.4'
 end
+
+gem 'redis'
