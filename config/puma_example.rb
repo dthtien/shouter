@@ -2,7 +2,7 @@ workers 1
 threads 1, 6
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-app_dir = '/home/deploy/voucher_trader_api'
+app_dir = '/home/deploy/shouter'
 current_dir = "#{app_dir}/current"
 shared_dir = "#{app_dir}/shared"
 
@@ -24,5 +24,5 @@ activate_control_app
 on_worker_boot do
   require "active_record"
   ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
-  ActiveRecord::Base.establish_connection(YAML.load_file("#{current_dir}/config/database.yml")[rails_env])
+  ActiveRecord::Base.establish_connection(YAML.load_file("#{shared_dir}/config/database.yml")[rails_env])
 end
