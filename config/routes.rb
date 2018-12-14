@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   root 'homes#show'
   mount Sidekiq::Web => '/jobs'
+  mount ActionCable.server => "/cable"
   resources :passwords, controller: 'clearance/passwords', only: %i[create new]
   resource :session, only: [:create]
   resources :messages, only: %i[index]
