@@ -5,7 +5,7 @@ set :application, 'shouter'
 set :repo_url, 'git@github.com:dthtien/shouter.git'
 set :deploy_user, 'deploy'
 
-set :deploy_to, "/home/#{fetch: :deploy_user}/#{fetch: :application}"
+set :deploy_to, "/home/#{fetch :deploy_user}/#{fetch :application}"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
