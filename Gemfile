@@ -40,6 +40,7 @@ group :development do
   gem 'capistrano-rbenv', '~> 2.1'
   gem 'capistrano-rails'
   gem 'capistrano-bundler', '~> 1.4'
+  gem 'capistrano-yarn'
 end
 
 gem 'redis'
