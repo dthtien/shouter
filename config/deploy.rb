@@ -40,4 +40,17 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secureaftet
-after 'deploy, 'deploy:cleanup'
+after 'deploy', 'deploy:cleanup'
+after 'deploy', 'puma:config'
+
+namespace :puma do
+  desc 'Config puma'
+  task :config do
+    on roles :web do
+      with current_path do
+        execute 'mv config/puma_example.rb config/puma.rb'
+        execute 'pumactl -P /home/deploy/shouter/shared/pids/puma.pid restart'
+      end
+    end
+  end
+end
