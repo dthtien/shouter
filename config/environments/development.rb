@@ -50,6 +50,9 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  config.action_cable.url = "ws://localhost:3000/cable"
+
+  config.action_cable.allowed_request_origins = [/http:\/\/*/, /https:\/\/*/]
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
