@@ -41,7 +41,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secureaftet
 after 'deploy', 'puma:config'
-after 'puma:config', 'nginx:restart' 
+after 'deploy', 'nginx:restart'
 
 namespace :puma do
   desc 'Config puma'
@@ -56,7 +56,7 @@ namespace :puma do
 end
 
 namespace :nginx do
-  taks :restart do
+  task :restart do
     on roles :web do
       execute 'sudo service nginx restart'
     end
