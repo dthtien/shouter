@@ -1,12 +1,12 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
   constraints Clearance::Constraints::SignedIn.new do
     root 'dashboards#show'
     get '' => 'dashboard#show', as: 'dashboard'
   end
   root 'homes#show'
   mount Sidekiq::Web => '/jobs'
-  mount ActionCable.server => "/cable"
   resources :passwords, controller: 'clearance/passwords', only: %i[create new]
   resource :session, only: [:create]
   resources :messages, only: %i[index]
