@@ -59,9 +59,7 @@ end
 namespace :nginx do
   task :restart do
     on roles :all do
-      as :root do
-        execute "#{sudo} service nginx restart"
-      end
+      execute "service nginx restart"
     end
   end
 end
