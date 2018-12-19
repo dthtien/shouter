@@ -13,11 +13,9 @@ class DashboardService
   attr_reader :user, :params
 
   def scope
-    @scope ||= if hashtag.present?
-                SearchService.new(term: "%##{hashtag}%").results
-              else
-                Shout
-              end
+    @scope = SearchService.new(term: "%##{hashtag}%").results if hashtag.present?
+    @scope = SearchService.new(term: term).results if term.present?
+    @scope ||= Shout
   end
 
   def timeline_users
@@ -29,8 +27,8 @@ class DashboardService
   end
 
   def term
-    return if params[:search].present?
+    return unless params[:search].present?
 
-    params[:search][:term]
+    params[:search]['term']
   end
 end

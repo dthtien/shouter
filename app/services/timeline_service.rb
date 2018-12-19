@@ -5,12 +5,7 @@ class TimelineService
   end
 
   def shouts
-    @shout = scope.includes(:user, :content)
-                  .where(user_id: users)
-                  .order(created_at: :desc)
-                  .map do |shout|
-                    ShoutPresenter.new shout
-                  end
+    @shout = scope.map{ |shout| ShoutPresenter.new shout }
   end
 
   def to_partial_path

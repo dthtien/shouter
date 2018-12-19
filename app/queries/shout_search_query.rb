@@ -4,8 +4,7 @@ class ShoutSearchQuery
   end
 
   def to_relation
-    matching_shout_for_text_shout
-      .or(matching_shout_for_photo_shout)
+    Shout.search(term).results
   end
 
   private
