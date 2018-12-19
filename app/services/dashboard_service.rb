@@ -15,7 +15,7 @@ class DashboardService
   def scope
     @scope = SearchService.new(term: "%##{hashtag}%").results if hashtag.present?
     @scope = SearchService.new(term: term).results if term.present?
-    @scope ||= Shout
+    @scope ||= Shout.all
   end
 
   def timeline_users

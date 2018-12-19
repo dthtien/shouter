@@ -74,3 +74,13 @@ namespace :sidekiq do
     end
   end
 end
+
+namespace :elastic_search do
+  task :reindex do
+    on roles :web do
+      within current_path do
+        execute :rake, 'db:reindex'
+      end
+    end
+  end
+end
