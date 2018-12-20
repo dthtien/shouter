@@ -43,6 +43,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 after 'deploy', 'puma:config'
 # after 'deploy', 'nginx:restart'
 after 'deploy', 'sidekiq:restart'
+after 'deploy', 'elastic_search:reindex'
 
 namespace :puma do
   desc 'Config puma'
